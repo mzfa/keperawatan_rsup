@@ -1,130 +1,88 @@
-
-<!doctype html>
-<html lang="en" class="h-100">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="generator" content="">
-    <title>Login - {{ env('APP_NAME')}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - {{ env('APP_NAME') }}</title>
 
-    <!-- manifest meta -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="manifest.js') }}on" />
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="{{ asset(env('APP_LOGO')) }}" sizes="180x180">
-    <link rel="icon" href="{{ asset(env('APP_LOGO')) }}" sizes="32x32" type="image/png">
-    <link rel="icon" href="{{ asset(env('APP_LOGO')) }}" sizes="16x16" type="image/png">
-
-    <!-- Google fonts-->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
-
-    <!-- bootstrap icons -->
-    <link rel="stylesheet" href="../../../../cdn.js') }}delivr.net/npm/bootstrap-icons%401.5.0/font/bootstrap-icons.css">
-
-    <!-- style css for this template -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" id="style">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
 
-<body class="body-scroll d-flex flex-column h-100" data-page="signin">
-
-    <!-- loader section -->
-    <div class="container-fluid loader-wrap">
-        <div class="row h-100">
-            <div class="col-10 col-md-6 col-lg-5 col-xl-3 mx-auto text-center align-self-center">
-                <div class="loader-cube-wrap loader-cube-animate mx-auto">
-                    <img src="{{ asset(env('APP_LOGO')) }}" alt="Logo">
-                </div>
-                <p class="mt-4">Aplikasi Keperawatan<br><strong>Please wait...</strong></p>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <img src="{{ asset(env('APP_LOGO')) }}" style="width:100%" alt="{{ env('APP_NAME') }}">
+                <h1>{{ env('APP_NAME') }}</h1>
             </div>
-        </div>
-    </div>
-    <!-- loader section ends -->
-
-    <!-- Begin page content -->
-    <main class="container-fluid h-100">
-        <div class="row h-100 overflow-auto">
-            <div class="col-12 text-center mb-auto px-0">
-                <header class="header">
-                    <div class="row">
-                        <div class="col-auto"></div>
-                        <div class="col">
-                            <div class="logo-small">
-                                <img src="{{ asset(env('APP_LOGO')) }}" alt="">
-                                <h5>Keperawatan</h5>
-                            </div>
-                        </div>
-                        <div class="col-auto"></div>
-                    </div>
-                </header>
-            </div>
-            
-            <form action="{{ route('login') }}" method="post">
-                @csrf
-                <div class="col-10 col-md-6 col-lg-5 col-xl-3 mx-auto align-self-center text-center py-4">
-                    <h1 class="mb-4 text-color-theme">Sign in</h1>
-                    @if ($errors->any())
+            <div class="card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+                @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         @foreach ($errors->all() as $error)
                             <strong>{{$error}} <br></strong> 
                         @endforeach
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-                    <div class="form-group form-floating mb-3 is-valid">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="username">
-                        <label class="form-control-label" for="username">Username</label>
-                    </div>
-                    
-
-                    <div class="form-group form-floating is-valid mb-3">
-                        <input type="password" class="form-control " id="password" name="password" placeholder="Password">
-                        <label class="form-control-label" for="password">Password</label>
-                        @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                <form action="{{ route('login') }}" method="post">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="username" placeholder="username">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
                         </div>
-                        @enderror
                     </div>
-                    <p class="mb-3 text-center">
-                        <a href="forgot-password.html" class="">
-                            Forgot your password?
-                        </a>
-                    </p>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
 
-                    <button type="submit" class="btn btn-lg btn-default w-100 mb-4 shadow">
-                        Sign in
-                    </button>
-                </div>
-            </form>
+
+            </div>
+            <!-- /.card-body -->
         </div>
-    </main>
-    
-    <!-- Required jquery and libraries -->
-    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap-5/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- /.card -->
+    </div>
+    <!-- /.login-box -->
 
-    <!-- cookie js -->
-    <script src="{{ asset('assets/js/jquery.cookie.js') }}"></script>
-
-    <!-- Customized jquery file  -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script src="{{ asset('assets/js/color-scheme.js') }}"></script>
-
-    <!-- PWA app service registration and works -->
-    <script src="{{ asset('assets/js/pwa-services.js') }}"></script>
-
-    <!-- page level custom script -->
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-    
-
+    <!-- jQuery -->
+    <script src="{{ url('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ url('assets/dist/js/adminlte.min.js') }}"></script>
 </body>
 
 </html>
