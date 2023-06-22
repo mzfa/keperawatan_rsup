@@ -34,7 +34,7 @@ class ProfileController extends Controller
         ->get();
         $provinsi = DB::table('pegawai_detail')->distinct()->get(['provinsi']);
         $kabupaten = DB::table('pegawai_detail')->distinct()->get(['kabupaten']);
-        // dd($provinsi);
+        dd($data);
         if(isset($data[0])){
             $data = $data[0];
         }
